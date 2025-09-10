@@ -3,6 +3,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
+import { swaggerSchemas } from './config/swagger-schemas';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -32,9 +33,12 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('providers', 'Provider search and management')
     .addTag('search', 'Search functionality')
+    .addTag('config', 'Configuration and constants')
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, config, {
+    extraModels: swaggerSchemas,
+  });
   SwaggerModule.setup('api', app, document, {
     swaggerOptions: {
       persistAuthorization: true,

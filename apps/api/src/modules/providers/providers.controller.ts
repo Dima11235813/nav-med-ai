@@ -10,11 +10,15 @@ import {
   ApiOperation,
   ApiResponse,
   ApiParam,
+  ApiExtraModels,
+  getSchemaPath,
 } from '@nestjs/swagger';
 import { ProvidersService } from './providers.service';
 import { Provider } from '@nav-med-ai/types';
+import { ProviderSchema, ApiResponseSchema } from '../../config/swagger-schemas';
 
 @ApiTags('providers')
+@ApiExtraModels(ProviderSchema, ApiResponseSchema)
 @Controller('providers')
 export class ProvidersController {
   constructor(private readonly providersService: ProvidersService) {}
@@ -35,9 +39,7 @@ export class ProvidersController {
     schema: {
       type: 'object',
       properties: {
-        data: {
-          $ref: '#/components/schemas/Provider',
-        },
+        data: { $ref: getSchemaPath(ProviderSchema) },
         success: { type: 'boolean' },
         message: { type: 'string' },
       },

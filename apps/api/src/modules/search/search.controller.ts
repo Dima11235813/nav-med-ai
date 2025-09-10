@@ -10,12 +10,16 @@ import {
   ApiOperation,
   ApiResponse,
   ApiQuery,
+  ApiExtraModels,
+  getSchemaPath,
 } from '@nestjs/swagger';
 import { SearchService } from './search.service';
 import { SearchFilters, Provider } from '@nav-med-ai/types';
 import { SearchProvidersDto } from './dto/search-providers.dto';
+import { ProviderSchema, ApiResponseSchema } from '../../config/swagger-schemas';
 
 @ApiTags('search')
+@ApiExtraModels(ProviderSchema, ApiResponseSchema)
 @Controller('search')
 export class SearchController {
   constructor(private readonly searchService: SearchService) {}
@@ -59,9 +63,7 @@ export class SearchController {
       properties: {
         data: {
           type: 'array',
-          items: {
-            $ref: '#/components/schemas/Provider',
-          },
+          items: { $ref: getSchemaPath(ProviderSchema) },
         },
         success: { type: 'boolean' },
         message: { type: 'string' },
