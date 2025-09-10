@@ -1,0 +1,24 @@
+# Cursor Rules — Project Management Artifacts
+
+## Never mutate canonical IDs
+- Do not change `id:` fields of E-/F-/S-/T-/ADR-/RFC- docs once created.
+- Status transitions allowed: planned → ready → in-progress → ready-for-qa → done.
+
+## Front matter enforcement
+- Each file must include YAML front matter with required keys:
+  - Epic (E-*): id, title, owner, status, links, success_metrics
+  - Feature (F-*): id, epic, title, status, owners, acceptance_criteria
+  - Story (S-*): id, feature, title, priority, estimate, status, qa_owner, links
+  - Task (T-*): id, story, title, type, status, definition_of_done
+- If any required key is missing, propose the minimal correction instead of continuing.
+
+## Acceptance Criteria (AC)
+- For Stories, AC must be written as testable Given/When/Then scenarios including at least one negative case.
+- Cursor must refuse to mark a Story `ready` if ACs are not present and specific.
+
+## Traceability
+- Stories must link up to a Feature; Features must link up to an Epic.
+- Add `Relates-To:` lines to cross-link Bugs, ADRs, RFCs.
+
+## Weekly notes & decisions
+- Append concise bullets (date-stamped) to `12-decisions-log/*.md` when introducing any process/architecture change.

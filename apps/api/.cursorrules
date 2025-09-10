@@ -1,0 +1,19 @@
+# Cursor Rules — API
+
+## Contracts first
+- Update OpenAPI schema and `packages/types` before handlers if request/response shapes change.
+
+## Non-functional requirements
+- Enforce rate limiting and include `Retry-After` on 429 if AC mentions it.
+- Add input validation (zod/class-validator) at boundaries.
+- Include structured logging with correlation IDs.
+
+## Tests
+- Unit test handlers and validators; add integration tests that exercise the OpenAPI contract.
+
+## Data
+- No PHI ingestion or storage in MVP scope.
+- Geocoding must use stubs/adapters with clear provider keys in `packages/config`.
+
+## Security
+- Use least-privilege env access; do not log PII-like fields; redact tokens.

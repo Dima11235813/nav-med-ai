@@ -1,0 +1,40 @@
+# Global Cursor Rules
+
+## Core doctrine
+- Follow the project-management taxonomy: Epic (E-####) → Feature (F-####) → Story (S-####) → Task (T-####).
+- Never invent IDs. Only use IDs that exist in proj-mgmt/*.md files.
+- When generating or changing code/tests/docs, ALWAYS reference at least one Story ID (S-####) and its Acceptance Criteria (AC).
+- Do not handle or create workflows that process PHI. If a change could introduce PHI, stop and propose an RFC.
+
+## Commit hygiene (applies when Cursor drafts commit messages)
+- Use Conventional Commits + Story trailer, e.g.:
+  - feat(web): add specialty+city search form
+  - fix(api): handle 429 retry-after header
+  - docs(proj-mgmt): add AC negative cases
+  Trailers:
+  - Refs: S-0001 F-0002 E-0002
+- Summaries ≤ 72 chars; body explains ACs satisfied.
+
+## PR hygiene (applies when Cursor drafts PR descriptions)
+- Must include:
+  - **Story IDs:** S-#### (and related F-#### / E-####)
+  - **ACs satisfied:** bullet list mapped 1:1
+  - **Tests:** list of unit/e2e added/updated
+  - **Risk/rollback:** brief plan
+  - **Screenshots/traces:** if UI/e2e changed
+- Block PR if any referenced Story lacks `status: in-progress | ready-for-qa`.
+
+## Typing & contracts
+- Prefer shared types from `packages/types`. Do not duplicate interfaces in app code.
+- If an API contract changed, update OpenAPI and `packages/types`, then cascade fixes.
+
+## Prompting & LLM use
+- Use only prompts stored under `proj-mgmt/08-prompts/**`. Don't inline ad-hoc prompts in code.
+- Reference prompt by `id@version` in code comments and PR body when output derives from it.
+
+## Legal/ethics
+- Include disclaimers from `proj-mgmt/10-legal-compliance/disclaimers.md` in any user-facing AI text.
+- Avoid medical advice; label AI content as educational.
+
+## Monorepo performance
+- Keep Nx/Turbo targets incremental; if a change affects only `packages/ui`, do not touch unrelated apps.

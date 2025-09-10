@@ -1,0 +1,10 @@
+# Cursor Rules — Packages
+
+## Single source of truth
+- `packages/types` is authoritative for domain models. Breaking changes must bump a minor (or major) version and trigger affected builds.
+
+## UI library
+- `packages/ui` components must be framework-agnostic for styling decisions defined here (no app-specific API leakage).
+
+## Config
+- `packages/config` exposes env schema (zod) + typed accessors; app code reads through it, never via process.env.

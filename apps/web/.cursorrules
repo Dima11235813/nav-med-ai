@@ -1,0 +1,19 @@
+# Cursor Rules — Web App
+
+## Story-driven changes
+- Any new UI component, route, or page must reference S-#### and its AC in the PR body.
+- Create/extend e2e tests to match ACs (happy + at least one negative case).
+
+## Types & state
+- Import domain types from `packages/types`; do not redefine.
+- Keep state colocated; prefer RTK Query or React Query patterns if applicable. No global stores for one-off flows.
+
+## Accessibility & UX
+- All interactive elements require accessible names.
+- Empty-state and error-state UI must be implemented if AC mentions them.
+
+## Telemetry
+- When adding user interactions relevant to KPIs, emit events using the shared telemetry util from `packages/config` (or telemetry pkg).
+
+## Performance
+- Avoid blocking the main thread; defer heavy work to web workers if necessary.

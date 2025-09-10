@@ -1,0 +1,23 @@
+# Cursor Rules — Prompts & Agents
+
+## Versioning
+- Every prompt must include semantic `version:` and a `changelog:` in front matter.
+- Never change content without bumping the version and adding a changelog entry.
+
+## Schemas
+- Prompts must declare `input_schema` and `output_schema` (json or markdown).
+- If output is json, require STRICT valid JSON and include a minimal example.
+
+## Guardrails
+- Include a "Policy" section specifying: no hallucination of provider data, no PHI, verified-profile penalties/boosts if ranking.
+- Reference eval suite IDs under `prompts/evals/suites/*` via `related:` list.
+
+## References
+- Include `related: [Story/Feature/Eval IDs]`.
+- In code consuming a prompt, annotate with `@prompt AG-0002@1.2.0`.
+
+## Evals
+- For ranking/search prompts, require an eval threshold (`nDCG@10`, `top1_match_rate`) and refuse downgrade unless explicitly approved in an RFC.
+
+## Reuse
+- Cursor should refuse creating ad-hoc prompts outside this directory tree.
