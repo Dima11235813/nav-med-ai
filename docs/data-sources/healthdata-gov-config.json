@@ -1,0 +1,124 @@
+{
+  "dataSource": {
+    "id": "healthdata-gov-catalog",
+    "name": "Healthdata.gov Dataset Catalog",
+    "description": "Federal health data catalog from HHS and partner agencies",
+    "category": "healthcare_providers",
+    "owner": "U.S. Department of Health and Human Services (HHS)",
+    "url": "https://www.healthdata.gov"
+  },
+  "api": {
+    "baseUrl": "https://www.healthdata.gov",
+    "endpoints": {
+      "catalog": "/data.json",
+      "search": "/data.json?search=",
+      "dataset": "/dataset/"
+    },
+    "authentication": {
+      "type": "none",
+      "rateLimits": {
+        "requestsPerHour": null,
+        "requestsPerDay": null
+      }
+    },
+    "dataFormats": ["csv", "json", "xml", "xlsx", "pdf"],
+    "bulkDownload": {
+      "available": true,
+      "method": "direct_download",
+      "formats": ["zip", "csv", "json"]
+    }
+  },
+  "data": {
+    "types": [
+      {
+        "name": "nppes_provider_registry",
+        "description": "Complete healthcare provider registry from CMS",
+        "source": "cms.gov",
+        "fields": ["npi", "name", "address", "taxonomy", "credentials", "enumeration_date"],
+        "primaryKey": "npi",
+        "updateFrequency": "weekly",
+        "estimatedRecords": 7000000,
+        "downloadUrl": "https://download.cms.gov/nppes/NPPES_Data_Dissemination_*.zip",
+        "size": "500MB"
+      },
+      {
+        "name": "hospital_general_information",
+        "description": "Hospital locations and basic information",
+        "source": "cms.gov",
+        "fields": ["provider_id", "name", "address", "ownership", "beds", "type"],
+        "primaryKey": "provider_id",
+        "updateFrequency": "annual",
+        "estimatedRecords": 6000,
+        "downloadUrl": "https://www.cms.gov/files/zip/hospital-general-information.zip",
+        "size": "5MB"
+      },
+      {
+        "name": "medicare_provider_utilization",
+        "description": "Provider utilization and payment data",
+        "source": "cms.gov",
+        "fields": ["npi", "name", "specialty", "services", "payments", "beneficiaries"],
+        "primaryKey": "npi",
+        "updateFrequency": "annual",
+        "estimatedRecords": 1000000,
+        "downloadUrl": "https://download.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Utilization-and-Payment-Data/Medicare-Physician-and-Other-Supplier-PUF.zip",
+        "size": "200MB"
+      }
+    ],
+    "quality": {
+      "completenessTarget": 0.99,
+      "accuracyTarget": 0.995,
+      "freshnessRequirement": "168_hours"
+    }
+  },
+  "technical": {
+    "errorHandling": {
+      "retryStrategy": "exponential_backoff",
+      "maxRetries": 3,
+      "timeoutSeconds": 300
+    },
+    "monitoring": {
+      "metrics": ["download_success", "file_size", "processing_time", "data_quality_score"],
+      "alerts": {
+        "errorRateThreshold": 0.05,
+        "staleDataThresholdHours": 200
+      }
+    }
+  },
+  "compliance": {
+    "phi": false,
+    "dataRetentionDays": null,
+    "usageRestrictions": "Public domain - no restrictions",
+    "attributionRequired": false,
+    "attributionText": "Data from Healthdata.gov"
+  },
+  "pipeline": {
+    "schedule": {
+      "catalogCheck": "daily",
+      "nppesUpdate": "weekly",
+      "annualUpdates": "monthly"
+    },
+    "processing": {
+      "chunkSize": 50000,
+      "parallelWorkers": 2,
+      "idempotent": true,
+      "validateChecksums": true
+    }
+  },
+  "catalog": {
+    "api": {
+      "format": "dcat",
+      "pagination": false,
+      "searchable": true
+    },
+    "monitoring": {
+      "newDatasets": true,
+      "updatedDatasets": true,
+      "deprecatedDatasets": true
+    },
+    "filters": {
+      "agencies": ["cms", "cdc", "nih", "fda"],
+      "categories": ["healthcare", "providers", "hospitals", "claims"],
+      "tags": ["nppes", "medicare", "provider"]
+    }
+  }
+}
