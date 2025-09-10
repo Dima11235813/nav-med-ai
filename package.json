@@ -10,7 +10,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "dev:full": "concurrently \"npm run dev:api\" \"npm run dev:web\" \"npm run dev:data\"",
+    "dev:full": "node scripts/start-dev.js",
     "dev:web": "cd apps/web && npm run dev",
     "dev:api": "cd apps/api && npm run start:dev",
     "dev:data": "echo 'Data pipeline service not yet implemented'",

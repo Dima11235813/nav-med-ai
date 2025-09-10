@@ -78,7 +78,9 @@ export class SearchService {
       }],
       reviews: [],
       metadata: {
+        source: 'mock-data',
         dataQuality: 'high',
+        updateFrequency: 'weekly',
         lastVerified: new Date().toISOString(),
       },
       createdAt: new Date().toISOString(),
@@ -156,7 +158,9 @@ export class SearchService {
       }],
       reviews: [],
       metadata: {
+        source: 'mock-data',
         dataQuality: 'high',
+        updateFrequency: 'weekly',
         lastVerified: new Date().toISOString(),
       },
       createdAt: new Date().toISOString(),

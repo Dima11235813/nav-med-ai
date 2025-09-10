@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Nav Med AI - Healthcare Navigation Platform Web Application",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
@@ -13,9 +14,9 @@
     "test:run": "vitest run"
   },
   "dependencies": {
-    "@nav-med-ai/types": "workspace:*",
-    "@nav-med-ai/ui": "workspace:*",
-    "@nav-med-ai/config": "workspace:*",
+    "@nav-med-ai/types": "file:../../packages/types",
+    "@nav-med-ai/ui": "file:../../packages/ui",
+    "@nav-med-ai/config": "file:../../packages/config",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
