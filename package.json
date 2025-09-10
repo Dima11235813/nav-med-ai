@@ -1,13 +1,28 @@
 {
   "name": "nav-med-ai",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "description": "Nav Med AI - Healthcare Navigation Platform",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "dev:full": "concurrently \"npm run dev:api\" \"npm run dev:web\" \"npm run dev:data\"",
+    "dev:web": "cd apps/web && npm run dev",
+    "dev:api": "cd apps/api && npm run start:dev",
+    "dev:data": "echo 'Data pipeline service not yet implemented'",
+    "start": "npm run dev:full",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
+    "install:all": "npm install",
+    "install:web": "cd apps/web && npm install",
+    "install:api": "cd apps/api && npm install",
+    "setup": "npm run install:all && npm run build:packages",
+    "build:packages": "cd packages/types && npm run build && cd ../config && npm run build && cd ../ui && npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,6 +36,7 @@
   },
   "homepage": "https://github.com/Dima11235813/nav-med-ai#readme",
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "nx": "^21.5.1",
     "turbo": "^2.5.6"
   }

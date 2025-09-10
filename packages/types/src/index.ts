@@ -37,42 +37,31 @@ export interface User {
   updatedAt: Timestamp;
 }
 
-// Provider types (core domain)
-export interface Provider {
-  id: ID;
-  name: string;
-  specialty: string;
-  location: Location;
-  address: Address;
-  phone?: string;
-  email?: string;
-  website?: string;
-  rating?: number;
-  verified: boolean;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
-}
+// Provider types (core domain) - using detailed domain version
+export {
+  Provider,
+  Specialty,
+  Location,
+  Address,
+  Rating,
+  ContactInfo,
+  Credential,
+  Insurance,
+  Education,
+  Experience,
+  Review,
+  ProviderMetadata
+} from './domain';
 
-export interface Location {
-  latitude: number;
-  longitude: number;
-  city: string;
-  state: string;
-  zipCode: string;
-}
-
-export interface Address {
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  country: string;
-}
 
 // Search types
 export interface SearchFilters {
-  specialty?: string;
-  location?: string;
+  specialty?: string[];
+  location?: {
+    city?: string;
+    state?: string;
+    zipCode?: string;
+  };
   radius?: number;
   rating?: number;
   verified?: boolean;
