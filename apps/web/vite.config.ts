@@ -15,9 +15,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': '/src',
-      '@nav-med-ai/types': '../../packages/types/dist',
-      '@nav-med-ai/ui': '../../packages/ui/dist',
-      '@nav-med-ai/config': '../../packages/config/dist',
+      '@nav-med-ai/types': '../../packages/types/dist/index.js',
+      '@nav-med-ai/ui': '../../packages/ui/dist/index.js',
+      '@nav-med-ai/config': '../../packages/config/dist/index.js',
     },
   },
 })
