@@ -1,12 +1,16 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, Logger } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
+import { LoggerService } from './common/logger/logger.service';
 import { swaggerSchemas } from './config/swagger-schemas';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Configure custom logger
+  app.useLogger(await app.resolve(LoggerService));
 
   // Security
   app.use(helmet());
