@@ -1,0 +1,91 @@
+{
+  "dataSource": {
+    "id": "healthcare-gov-api",
+    "name": "Healthcare.gov Provider Directory API",
+    "description": "Official healthcare provider and facility data from CMS",
+    "category": "healthcare_providers",
+    "owner": "Centers for Medicare & Medicaid Services (CMS)",
+    "url": "https://www.healthcare.gov"
+  },
+  "api": {
+    "baseUrl": "https://www.healthcare.gov/api",
+    "endpoints": {
+      "providers": "/provider-directory",
+      "facilities": "/facility-data",
+      "plans": "/plan-data"
+    },
+    "authentication": {
+      "type": "api_key",
+      "headerName": "X-API-Key",
+      "registrationUrl": "https://www.healthcare.gov/developers/",
+      "rateLimits": {
+        "requestsPerHour": 1000,
+        "requestsPerDay": 100000
+      }
+    },
+    "dataFormats": ["json", "xml"],
+    "bulkDownload": {
+      "available": true,
+      "url": "https://www.healthcare.gov/bulk-data",
+      "schedule": "quarterly",
+      "formats": ["csv", "json"]
+    }
+  },
+  "data": {
+    "types": [
+      {
+        "name": "individual_providers",
+        "description": "Licensed healthcare providers",
+        "fields": ["npi", "name", "specialty", "address", "phone", "languages"],
+        "primaryKey": "npi",
+        "updateFrequency": "weekly",
+        "estimatedRecords": 1500000
+      },
+      {
+        "name": "facilities",
+        "description": "Healthcare facilities and hospitals",
+        "fields": ["facility_id", "name", "type", "address", "services", "capacity"],
+        "primaryKey": "facility_id",
+        "updateFrequency": "quarterly",
+        "estimatedRecords": 8000
+      }
+    ],
+    "quality": {
+      "completenessTarget": 0.95,
+      "accuracyTarget": 0.99,
+      "freshnessRequirement": "24_hours"
+    }
+  },
+  "technical": {
+    "errorHandling": {
+      "retryStrategy": "exponential_backoff",
+      "maxRetries": 3,
+      "timeoutSeconds": 30
+    },
+    "monitoring": {
+      "metrics": ["request_count", "error_rate", "response_time", "data_freshness"],
+      "alerts": {
+        "errorRateThreshold": 0.05,
+        "staleDataThresholdHours": 25
+      }
+    }
+  },
+  "compliance": {
+    "phi": false,
+    "dataRetentionDays": 2555,
+    "usageRestrictions": "Commercial use allowed with attribution",
+    "attributionRequired": true,
+    "attributionText": "Data from Healthcare.gov"
+  },
+  "pipeline": {
+    "schedule": {
+      "fullRefresh": "quarterly",
+      "incrementalUpdate": "weekly"
+    },
+    "processing": {
+      "chunkSize": 1000,
+      "parallelWorkers": 4,
+      "idempotent": true
+    }
+  }
+}
