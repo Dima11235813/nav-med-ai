@@ -4,7 +4,7 @@ feature: F-0003
 title: Fix Swagger API Documentation Schemas
 priority: P1
 estimate: 3
-status: in-progress
+status: completed
 qa_owner: Backend-QA
 links: [S-0014]
 ---
