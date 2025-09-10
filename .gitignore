@@ -17,3 +17,23 @@ node_modules
 .nx/installation
 .nx/cache
 .nx/workspace-data
+
+# Build artifacts
+dist/
+*.js
+*.js.map
+*.d.ts
+*.d.ts.map
+tsconfig.tsbuildinfo
+
+# Package-specific build artifacts
+packages/*/dist/
+packages/*/*.js
+packages/*/*.js.map
+packages/*/*.d.ts
+packages/*/*.d.ts.map
+packages/*/tsconfig.tsbuildinfo
+
+# Keep source files
+!packages/*/src/**/*.ts
+!packages/*/src/**/*.tsx

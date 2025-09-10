@@ -1,0 +1,22 @@
+{
+  "name": "@nav-med-ai/config",
+  "version": "0.0.1",
+  "description": "Shared configuration and environment variables for the Nav Med AI platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "keywords": [
+    "config",
+    "environment",
+    "nav-med-ai"
+  ],
+  "author": "Nav Med AI Team",
+  "license": "MIT"
+}

@@ -1,0 +1,37 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "jsx": "react-jsx",
+    "lib": ["dom", "dom.iterable", "es6"],
+    "target": "es2015",
+    "module": "esnext",
+    "baseUrl": "../..",
+    "paths": {
+      "@nav-med-ai/types": ["packages/types/src"],
+      "@nav-med-ai/ui": ["packages/ui/src"],
+      "@nav-med-ai/config": ["packages/config/src"],
+      "@nav-med-ai/data-pipeline": ["packages/data-pipeline/src"]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.stories.tsx",
+    "**/*.test.tsx"
+  ]
+}

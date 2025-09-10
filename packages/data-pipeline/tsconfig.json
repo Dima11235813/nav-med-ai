@@ -1,0 +1,33 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "lib": ["es2020"],
+    "target": "es2020",
+    "baseUrl": "../..",
+    "paths": {
+      "@nav-med-ai/types": ["packages/types/src"],
+      "@nav-med-ai/ui": ["packages/ui/src"],
+      "@nav-med-ai/config": ["packages/config/src"],
+      "@nav-med-ai/data-pipeline": ["packages/data-pipeline/src"]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
