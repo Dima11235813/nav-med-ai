@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,9 +16,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': '/src',
-      '@nav-med-ai/types': '../../packages/types/dist/index.js',
-      '@nav-med-ai/ui': '../../packages/ui/dist/index.js',
-      '@nav-med-ai/config': '../../packages/config/dist/index.js',
+      '@nav-med-ai/types': path.resolve(__dirname, '../../packages/types/dist/index.js'),
+      '@nav-med-ai/ui': path.resolve(__dirname, '../../packages/ui/dist/index.js'),
+      '@nav-med-ai/config': path.resolve(__dirname, '../../packages/config/dist/index.js'),
     },
   },
 })

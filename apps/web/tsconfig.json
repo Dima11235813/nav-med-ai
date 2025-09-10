@@ -22,21 +22,21 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@nav-med-ai/types": ["../../packages/types/dist/index.d.ts"],
-      "@nav-med-ai/ui": ["../../packages/ui/dist/index.d.ts"],
-      "@nav-med-ai/config": ["../../packages/config/dist/index.d.ts"]
+      "@nav-med-ai/types": ["packages/types/dist/index.d.ts"],
+      "@nav-med-ai/ui": ["packages/ui/dist/index.d.ts"],
+      "@nav-med-ai/config": ["packages/config/dist/index.d.ts"]
     }
   },
   "include": [
     "src",
     "src/**/*.ts",
     "src/**/*.tsx",
-    "../../packages/*/dist/**/*.d.ts"
+    "packages/*/dist/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",
     "dist",
-    "../../packages/*/node_modules",
-    "../../packages/*/src"
+    "packages/*/node_modules",
+    "packages/*/src"
   ]
 }
