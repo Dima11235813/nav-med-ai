@@ -16,6 +16,13 @@
 - For Stories, AC must be written as testable Given/When/Then scenarios including at least one negative case.
 - Cursor must refuse to mark a Story `ready` if ACs are not present and specific.
 
+## Data Ingestion Pipeline Rules
+- All data sources must be public and de-identified to avoid PHI compliance issues
+- Data quality metrics must be tracked: completeness (>95%), accuracy (>98%), timeliness (<24hrs)
+- Pipeline must handle various data formats: CSV, JSON, XML, APIs
+- Implement idempotent processing to handle duplicate data gracefully
+- Include comprehensive logging and error handling for debugging
+
 ## Traceability
 - Stories must link up to a Feature; Features must link up to an Epic.
 - Add `Relates-To:` lines to cross-link Bugs, ADRs, RFCs.
