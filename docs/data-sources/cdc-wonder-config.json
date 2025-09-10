@@ -1,0 +1,134 @@
+{
+  "dataSource": {
+    "id": "cdc-wonder",
+    "name": "CDC WONDER Online Query System",
+    "description": "CDC's online query system for public health statistics and healthcare data",
+    "category": "healthcare_statistics",
+    "owner": "Centers for Disease Control and Prevention (CDC)",
+    "url": "https://wonder.cdc.gov"
+  },
+  "api": {
+    "baseUrl": "https://wonder.cdc.gov",
+    "endpoints": {
+      "query": "/controller/datarequest/",
+      "export": "/controller/datarequest/export"
+    },
+    "authentication": {
+      "type": "none",
+      "rateLimits": {
+        "requestsPerHour": 60,
+        "requestsPerDay": 1000
+      }
+    },
+    "dataFormats": ["txt", "csv", "xml"],
+    "bulkDownload": {
+      "available": false,
+      "method": "query_export",
+      "formats": ["csv", "txt"]
+    }
+  },
+  "data": {
+    "types": [
+      {
+        "name": "national_vital_statistics",
+        "description": "Birth and death statistics with healthcare facility data",
+        "database": "D76",
+        "fields": ["facility_type", "location", "counts", "rates"],
+        "updateFrequency": "monthly",
+        "estimatedRecords": "aggregated",
+        "dataLag": "6_months",
+        "geographicLevels": ["national", "state", "county"]
+      },
+      {
+        "name": "national_hospital_care_survey",
+        "description": "Hospital utilization and characteristics survey",
+        "database": "NHCS",
+        "fields": ["hospital_type", "services", "utilization", "patient_characteristics"],
+        "updateFrequency": "annual",
+        "estimatedRecords": "sample_35k_visits",
+        "dataLag": "12_months",
+        "geographicLevels": ["national", "state"]
+      },
+      {
+        "name": "national_ambulatory_medical_care",
+        "description": "Physician office visit survey with provider characteristics",
+        "database": "NAMCS",
+        "fields": ["provider_specialty", "visit_type", "diagnoses", "treatments"],
+        "updateFrequency": "annual",
+        "estimatedRecords": "sample_25k_visits",
+        "dataLag": "12_months",
+        "geographicLevels": ["national", "state"]
+      }
+    ],
+    "quality": {
+      "completenessTarget": 0.95,
+      "accuracyTarget": 0.98,
+      "freshnessRequirement": "720_hours"
+    }
+  },
+  "technical": {
+    "errorHandling": {
+      "retryStrategy": "exponential_backoff",
+      "maxRetries": 3,
+      "timeoutSeconds": 600
+    },
+    "monitoring": {
+      "metrics": ["query_success", "export_time", "data_completeness", "statistical_validation"],
+      "alerts": {
+        "errorRateThreshold": 0.1,
+        "staleDataThresholdHours": 800
+      }
+    }
+  },
+  "compliance": {
+    "phi": false,
+    "dataRetentionDays": null,
+    "usageRestrictions": "Research and public health use only",
+    "attributionRequired": true,
+    "attributionText": "Centers for Disease Control and Prevention, National Center for Health Statistics"
+  },
+  "pipeline": {
+    "schedule": {
+      "monthlyUpdate": "monthly",
+      "annualUpdate": "quarterly"
+    },
+    "processing": {
+      "chunkSize": 1000,
+      "parallelWorkers": 1,
+      "idempotent": true,
+      "validateStatistics": true
+    }
+  },
+  "query": {
+    "interface": {
+      "type": "web_form",
+      "automation": "selenium_based",
+      "sessionManagement": true
+    },
+    "parameters": {
+      "geographic": ["national", "state", "county"],
+      "temporal": ["year", "month", "quarter"],
+      "demographic": ["age", "gender", "race"],
+      "healthcare": ["facility_type", "provider_specialty", "visit_type"]
+    },
+    "export": {
+      "maxRows": 1000,
+      "formats": ["tab_delimited", "csv", "xml"],
+      "compression": false,
+      "delivery": ["direct", "email"]
+    }
+  },
+  "limitations": {
+    "dataType": "aggregated_statistics",
+    "individualRecords": false,
+    "realTime": false,
+    "apiAccess": "limited",
+    "automation": "challenging"
+  },
+  "integration": {
+    "role": "complementary",
+    "primaryUse": "validation_and_context",
+    "updateStrategy": "monthly_checks",
+    "storage": "time_series_aggregates"
+  }
+}
