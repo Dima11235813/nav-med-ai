@@ -3,6 +3,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { ProvidersModule } from './modules/providers/providers.module';
 import { SearchModule } from './modules/search/search.module';
 import { ConfigModule } from './config/config.module';
+import { PublicConfigModule } from './modules/config/config.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ConfigModule } from './config/config.module';
     ]),
     // Configuration
     ConfigModule,
+    PublicConfigModule,
     // Feature modules
     ProvidersModule,
     SearchModule,

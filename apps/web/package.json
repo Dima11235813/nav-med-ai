@@ -16,7 +16,6 @@
   "dependencies": {
     "@nav-med-ai/types": "file:../../packages/types",
     "@nav-med-ai/ui": "file:../../packages/ui",
-    "@nav-med-ai/config": "file:../../packages/config",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",

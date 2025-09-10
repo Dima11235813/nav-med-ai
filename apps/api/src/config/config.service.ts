@@ -32,4 +32,21 @@ export class ConfigService {
   get apiBaseUrl(): string {
     return this.appConfig.api.baseUrl;
   }
+
+  // Public configuration accessors
+  get aiSearchEnabled(): boolean {
+    return this.appConfig.features.aiSearch;
+  }
+
+  get telemedicineEnabled(): boolean {
+    return this.appConfig.features.telemedicine;
+  }
+
+  get multiLanguageEnabled(): boolean {
+    return this.appConfig.features.multiLanguage;
+  }
+
+  get corsOrigins(): string[] {
+    return this.appConfig.security.cors.origin;
+  }
 }

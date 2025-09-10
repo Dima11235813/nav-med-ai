@@ -18,7 +18,6 @@ export default defineConfig({
       '@': '/src',
       '@nav-med-ai/types': path.resolve(__dirname, '../../packages/types/dist/index.js'),
       '@nav-med-ai/ui': path.resolve(__dirname, '../../packages/ui/dist/index.js'),
-      '@nav-med-ai/config': path.resolve(__dirname, '../../packages/config/dist/index.js'),
     },
   },
 })

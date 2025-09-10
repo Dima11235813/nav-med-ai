@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Input, Select } from '@nav-med-ai/ui'
-import { PROVIDER_SPECIALTIES, US_STATES } from '@nav-med-ai/config'
+import { configService } from '../services/config.service'
 import { SearchFilters } from '@nav-med-ai/types'
 
 interface SearchFormProps {
@@ -19,6 +19,28 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, className = '' }) => 
     zipCode: '',
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [constants, setConstants] = useState<{
+    providerSpecialties: string[]
+    usStates: Array<{ code: string; name: string }>
+  } | null>(null)
+  const [constantsLoading, setConstantsLoading] = useState(true)
+
+  // Load constants on component mount
+  useEffect(() => {
+    const loadConstants = async () => {
+      try {
+        const loadedConstants = await configService.getConstants()
+        setConstants(loadedConstants)
+      } catch (error) {
+        console.error('Failed to load constants:', error)
+        // The config service has fallbacks, so it should still work
+      } finally {
+        setConstantsLoading(false)
+      }
+    }
+
+    loadConstants()
+  }, [])
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {}
@@ -87,15 +109,15 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, className = '' }) => 
     }
   }
 
-  const specialtyOptions = PROVIDER_SPECIALTIES.map(specialty => ({
+  const specialtyOptions = constants?.providerSpecialties.map(specialty => ({
     value: specialty,
     label: specialty,
-  }))
+  })) || []
 
-  const stateOptions = US_STATES.map(state => ({
+  const stateOptions = constants?.usStates.map(state => ({
     value: state.code,
     label: `${state.name} (${state.code})`,
-  }))
+  })) || []
 
   return (
     <div className={`w-full max-w-2xl mx-auto ${className}`}>
@@ -109,13 +131,22 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, className = '' }) => 
           </p>
         </div>
 
-        {errors.general && (
-          <div className="bg-red-50 border border-red-200 rounded-md p-4">
-            <p className="text-red-800 text-sm">{errors.general}</p>
+        {constantsLoading && (
+          <div className="text-center py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+            <p className="text-gray-600 mt-2">Loading...</p>
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {!constantsLoading && (
+          <>
+            {errors.general && (
+              <div className="bg-red-50 border border-red-200 rounded-md p-4">
+                <p className="text-red-800 text-sm">{errors.general}</p>
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="specialty" className="block text-sm font-medium text-gray-700 mb-1">
               Specialty *
@@ -209,14 +240,16 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, className = '' }) => 
           </Button>
         </div>
 
-        <div className="text-center text-sm text-gray-500 mt-4">
-          <p>
-            Looking for a specific provider?{' '}
-            <a href="#" className="text-blue-600 hover:text-blue-800">
-              Browse all providers
-            </a>
-          </p>
-        </div>
+            <div className="text-center text-sm text-gray-500 mt-4">
+              <p>
+                Looking for a specific provider?{' '}
+                <a href="#" className="text-blue-600 hover:text-blue-800">
+                  Browse all providers
+                </a>
+              </p>
+            </div>
+          </>
+        )}
       </form>
     </div>
   )
