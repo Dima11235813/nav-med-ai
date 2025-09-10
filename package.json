@@ -1,0 +1,27 @@
+{
+  "name": "nav-med-ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dima11235813/nav-med-ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dima11235813/nav-med-ai/issues"
+  },
+  "homepage": "https://github.com/Dima11235813/nav-med-ai#readme",
+  "devDependencies": {
+    "nx": "^21.5.1",
+    "turbo": "^2.5.6"
+  }
+}
