@@ -3,7 +3,7 @@ id: T-0012
 story: S-0011
 title: Configure core NestJS modules and middleware
 type: backend
-status: planned
+status: completed
 definition_of_done:
   - ConfigModule configured for environment variables
   - Logger module set up with proper formatting

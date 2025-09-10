@@ -1,33 +1,35 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "strict": true,
-    "esModuleInterop": true,
+    "target": "ES2020",
+    "lib": ["ES2020"],
+    "allowJs": true,
     "skipLibCheck": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "module": "CommonJS",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "lib": ["es2020"],
-    "target": "es2020",
-    "baseUrl": "../..",
+    "sourceMap": true,
+    "baseUrl": ".",
     "paths": {
       "@nav-med-ai/types": ["packages/types/src"],
       "@nav-med-ai/ui": ["packages/ui/src"],
       "@nav-med-ai/config": ["packages/config/src"],
       "@nav-med-ai/data-pipeline": ["packages/data-pipeline/src"]
-    }
+    },
+    "declaration": true,
+    "declarationMap": true,
+    "incremental": true
   },
-  "include": [
-    "src/**/*"
-  ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
   ]
 }

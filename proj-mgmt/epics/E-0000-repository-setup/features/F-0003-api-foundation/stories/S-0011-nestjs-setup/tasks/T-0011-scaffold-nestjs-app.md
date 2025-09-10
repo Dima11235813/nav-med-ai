@@ -3,7 +3,7 @@ id: T-0011
 story: S-0011
 title: Scaffold NestJS application structure
 type: backend
-status: planned
+status: completed
 definition_of_done:
   - NestJS CLI installed and configured
   - Application structure created in apps/api/

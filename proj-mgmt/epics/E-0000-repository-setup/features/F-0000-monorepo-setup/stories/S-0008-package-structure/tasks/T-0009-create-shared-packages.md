@@ -3,7 +3,7 @@ id: T-0009
 story: S-0008
 title: Create shared packages directory structure
 type: devops
-status: planned
+status: completed
 definition_of_done:
   - packages/ directory structure created
   - Initial package.json files created for each package

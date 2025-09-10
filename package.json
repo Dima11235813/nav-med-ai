@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Nav Med AI - Healthcare Navigation Platform",
   "private": true,
+  "packageManager": "npm@10.2.3",
   "workspaces": [
     "apps/*",
     "packages/*"
