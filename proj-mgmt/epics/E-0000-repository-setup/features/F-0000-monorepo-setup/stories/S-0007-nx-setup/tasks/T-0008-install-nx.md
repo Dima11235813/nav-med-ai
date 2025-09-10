@@ -3,7 +3,7 @@ id: T-0008
 story: S-0007
 title: Install and initialize Nx workspace
 type: devops
-status: planned
+status: completed
 definition_of_done:
   - Nx CLI installed and workspace initialized
   - nx.json configuration file created
