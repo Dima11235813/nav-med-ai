@@ -13,6 +13,14 @@ export class ConfigService {
     return this.appConfig.database.url;
   }
 
+  get databasePoolSize(): number {
+    return this.appConfig.database.poolSize;
+  }
+
+  get sslEnabled(): boolean {
+    return this.appConfig.database.ssl;
+  }
+
   get jwtSecret(): string {
     return this.appConfig.auth.jwtSecret;
   }

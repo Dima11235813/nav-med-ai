@@ -3,6 +3,12 @@
 ## Contracts first
 - Update OpenAPI schema and `packages/types` before handlers if request/response shapes change.
 
+## Naming conventions
+- **Entity naming**: Database entities should use `Entity` suffix (e.g., `ProviderEntity`), not `DTO`
+- **Wire format naming**: JSON objects crossing the wire should use `Response`/`Request` suffixes
+- **Validation objects**: Input validation should use `Input` or `Create/Update` suffixes
+- **Shared types**: Import domain types from `packages/types` for consistency across frontend/backend
+
 ## Non-functional requirements
 - Enforce rate limiting and include `Retry-After` on 429 if AC mentions it.
 - Add input validation (zod/class-validator) at boundaries.

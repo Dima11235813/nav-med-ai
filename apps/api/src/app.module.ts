@@ -6,6 +6,7 @@ import { ConfigModule } from './config/config.module';
 import { PublicConfigModule } from './modules/config/config.module';
 import { HealthModule } from './modules/health/health.module';
 import { CommonModule } from './common/common.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -19,6 +20,8 @@ import { CommonModule } from './common/common.module';
     // Configuration
     ConfigModule,
     PublicConfigModule,
+    // Database
+    DatabaseModule,
     // Common utilities
     CommonModule,
     // Health monitoring

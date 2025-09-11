@@ -4,9 +4,10 @@ feature: F-0003
 title: NestJS Application Setup
 priority: P0
 estimate: 3
-status: planned
+status: completed
 qa_owner: Backend-QA
 links: [S-0010]
+tasks: [T-0011, T-0012]
 ---
 
 ### User Story

@@ -4,7 +4,7 @@ feature: F-0003
 title: Database Integration Setup
 priority: P0
 estimate: 2
-status: planned
+status: in-progress
 qa_owner: Backend-QA
 links: [S-0011]
 ---

@@ -3,6 +3,12 @@
 ## Single source of truth
 - `packages/types` is authoritative for domain models. Breaking changes must bump a minor (or major) version and trigger affected builds.
 
+## Entity vs DTO distinction
+- **Domain types in packages/types**: Pure TypeScript interfaces for business logic and wire format
+- **Database entities**: Use `Entity` suffix, import domain types but extend with database-specific concerns
+- **Wire format objects**: Use `Response`/`Request` suffixes for JSON serialization
+- **Consistency**: Frontend and backend should use the same domain types from packages/types
+
 ## UI library
 - `packages/ui` components must be framework-agnostic for styling decisions defined here (no app-specific API leakage).
 

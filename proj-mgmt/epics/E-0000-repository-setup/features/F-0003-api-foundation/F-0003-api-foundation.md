@@ -2,14 +2,14 @@
 id: F-0003
 epic: E-0000
 title: API Application Foundation
-status: planned
+status: in-progress
 owners: [Backend]
 acceptance_criteria:
   - "NestJS API application scaffolded with core modules"
   - "Database integration configured with PostgreSQL/PostGIS"
   - "Initial REST endpoints operational for provider search"
   - "API documentation generated and accessible"
-links: []
+links: [S-0011]
 ---
 
 ## Feature Overview
@@ -90,7 +90,7 @@ apps/api/
 
 ## Success Criteria
 
-- [ ] NestJS application running on localhost:3000
+- [x] NestJS application running on localhost:3000
 - [ ] Database connection established and functional
 - [ ] Provider search endpoints returning mock data
 - [ ] Swagger documentation accessible at /api
